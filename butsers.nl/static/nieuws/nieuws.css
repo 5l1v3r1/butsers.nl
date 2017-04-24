@@ -1,0 +1,14 @@
+.laatsteNieuwsTable {	margin: 0 auto;	}
+
+.laatsteNieuwsTable tr:nth-child(odd)	{	background: #eeeee3;	}
+.laatsteNieuwsTable tr:nth-child(even)	{	background: #eeeef3;	}
+
+.laatsteNieuwsTable td{ 
+	padding:5px;
+	border:#4e95ef;
+	border-top-style: groove;
+}
+
+.niewsImage {
+	opacity: 0.5;
+}

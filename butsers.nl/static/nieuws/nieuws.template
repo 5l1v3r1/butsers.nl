@@ -1,0 +1,7 @@
+<style type="text/css">{STYLESPACE}</style>
+
+<table class="laatsteNieuwsTable">{TABLESPACE}</table>
+
+<h3>Sources</h3>
+
+<table class="laatsteNieuwsTable">{SOURCESPACE}</table>

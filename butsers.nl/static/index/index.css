@@ -1,0 +1,18 @@
+html {  text-align: center;   }
+body
+{
+	margin: 2 auto; 
+	font-family: monospace;
+	background-color: #eeeee9;
+	color: #575c7d;
+}
+a
+{ 
+	color: #575c7d; 
+	text-decoration: none;  
+	font-weight: bold;      
+}  
+a:hover {
+	color: #485e0f;
+	cursor: pointer;
+}  

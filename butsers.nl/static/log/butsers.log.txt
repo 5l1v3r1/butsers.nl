@@ -1,0 +1,25 @@
+
+<style type="text/css">
+	.logTable {	margin: 0 auto;	}
+
+	.logTable tr:nth-child(odd)	{	background: #eeeee3;	}
+	.logTable tr:nth-child(even)	{	background: #eeeef3;	}
+
+	.logTable td{ 
+		padding:5px;
+		border:#4e95ef;
+		border-top-style: groove;
+		text-align: left;
+	}
+</style>
+
+
+<table class="logTable">
+	<tr>
+		<td>[23-04-2017] Nieuws module werkend</td>
+	</tr>
+
+	<tr>
+		<td>[24-04-2017] Eerste versie van Butsers.nl online en op Github</td>
+	</tr>
+</table>

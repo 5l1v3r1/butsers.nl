@@ -1,0 +1,4 @@
+<tr>
+	<td><img alt="{IMGALT}" class="newsImage" src="data:image/png;base64,{IMAGEB64}" /></td>
+	<td><a href="{SOURCELINK}">{SOURCEDESC}</a></td>
+</tr>

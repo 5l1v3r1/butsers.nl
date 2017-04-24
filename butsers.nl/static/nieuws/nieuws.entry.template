@@ -1,0 +1,5 @@
+<tr>
+	<td><img alt="{IMGALT}" class="newsImage" src="data:image/png;base64,{IMAGEB64}" /></td>
+	<td><a href="{LINKURL}">{LINKDESC}</a></td>
+	<td><small>{LINKPUB}</small></td>
+</tr>
