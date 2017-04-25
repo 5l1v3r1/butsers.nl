@@ -22,4 +22,8 @@
 	<tr>
 		<td>[24-04-2017] Eerste versie van Butsers.nl online en op Github</td>
 	</tr>
+
+	<tr>
+		<td>[25-04-2017] In-depth security in db class bijgewerkt en nieuws class veranderd</td>
+	</tr>
 </table>

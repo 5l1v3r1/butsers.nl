@@ -16,8 +16,7 @@ configDict = {
 	}
 
 sys.path.append(configDict['libDir'])
-from butsers import butserver
-from butsdb import butsdb
+from butsers import butserver, butsdb
 
 databaseHandler = butsdb.ButsDB(configDict)
 databaseHandler.init()

@@ -8,27 +8,11 @@ def sanitizeNieuwsValue(val):
 	return val.replace('"','')
 
 
+def getGeneratedSources(sourceTemplate, sourceEntries, sourceDict):
+	''' Return sources in template and fill dictionary '''
 
-def getContent(userObject, parameters, configDict, databaseHandler):
-
-	staticDir = configDict['staticDir']
-
-	newsEntries = databaseHandler.selectLatest("nieuws_entries", "linkPublished", maxResults = 50, sortOrder='DESC')
-
-	nieuwsPageTemplate = filebasic.getFileContent(staticDir + '/nieuws/nieuws.template')
-	nieuwsPageCSS = filebasic.getFileContent(staticDir + '/nieuws/nieuws.css')
-
-	nieuwsPageTemplate = nieuwsPageTemplate.replace('{STYLESPACE}', nieuwsPageCSS)
-
-	nieuwsEntryTemplate = filebasic.getFileContent(staticDir + '/nieuws/nieuws.entry.template')
-
-	allEntries = ""
 	allSources = ""
-	sourceDict = {}
-
-	sourceTemplate = filebasic.getFileContent(staticDir + '/nieuws/nieuws.source.template')
-
-	sourceEntries = databaseHandler.selectAll("nieuws_sources")
+	
 	for sourceEntry in sourceEntries:
 		sourceId, sourceName, sourceURL, sourceB64Image = sourceEntry
 		sourceDict[sourceId] = (sourceName, sourceURL, sourceB64Image)
@@ -44,8 +28,13 @@ def getContent(userObject, parameters, configDict, databaseHandler):
 
 		allSources += newEntry + "\n"
 
-	nieuwsPageTemplate = nieuwsPageTemplate.replace('{SOURCESPACE}', allSources)
+	return allSources
 
+
+def getGeneratedNieuwsEntries(nieuwsEntryTemplate, newsEntries, sourceDict):
+	''' Return news entries in template '''
+
+	allEntries = ""
 
 	for entry in newsEntries:
 		entryId, sourceId, linkURL, linkDesc, linkPublished = entry
@@ -76,6 +65,31 @@ def getContent(userObject, parameters, configDict, databaseHandler):
 
 		allEntries += "\n" + newEntry
 
+	return allEntries
+
+
+def getContent(userObject, parameters, configDict, databaseHandler):
+
+	staticDir = configDict['staticDir']
+
+	# get nieuws template
+	nieuwsPageTemplate = filebasic.getFileContent(staticDir + '/nieuws/nieuws.template')
+
+	# fill css
+	nieuwsPageCSS = filebasic.getFileContent(staticDir + '/nieuws/nieuws.css')
+	nieuwsPageTemplate = nieuwsPageTemplate.replace('{STYLESPACE}', nieuwsPageCSS)
+
+	# get all sources and fill template
+	sourceEntries = databaseHandler.selectAll("nieuws_sources")
+	sourceTemplate = filebasic.getFileContent(staticDir + '/nieuws/nieuws.source.template')
+	sourceDict = {}
+	allSources = getGeneratedSources(sourceTemplate, sourceEntries, sourceDict)
+	nieuwsPageTemplate = nieuwsPageTemplate.replace('{SOURCESPACE}', allSources)
+
+	# get all nieuws entries and fill template
+	newsEntries = databaseHandler.selectLatest("nieuws_entries", "linkPublished", maxResults = 50, sortOrder='DESC')
+	nieuwsEntryTemplate = filebasic.getFileContent(staticDir + '/nieuws/nieuws.entry.template')
+	allEntries = getGeneratedNieuwsEntries(nieuwsEntryTemplate, newsEntries, sourceDict)
 	nieuwsPageTemplate = nieuwsPageTemplate.replace('{TABLESPACE}', allEntries)
 	
 	return nieuwsPageTemplate, "text/html"
